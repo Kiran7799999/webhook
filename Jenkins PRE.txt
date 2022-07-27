@@ -1,0 +1,148 @@
+                                                                                                                             
+                                                                              Jenkins
+
+ sun microsystems by kawaguchi 
+
+HUDSON(2004) known as JENKINS 2010 (Oracle). 2011
+
+Jenkins known as a Heart/Core part of the DevOps.
+ 
+1. Jenkins is an Open source project written in JAVA that runs on Windows, Linux, Mac-os.
+2.Free to use and first choice for CI(Continouous integration) process.
+3.It is java based application.
+3.Consist plugins (Nothing but predefined software for automation process) SDLC.
+4.SDLC means Software Development Life Cycle.
+It is plugin based tool. nearly 1000+ plugins Jenkins will support.
+
+Plugins are the primary means of enhancing the functionality of a Jenkins environment to suit organization- or user-specific needs. 
+There are over a thousand different plugins which can be installed on a Jenkins controller and to integrate various 
+build tools, cloud providers, analysis tools, and much more.
+
+5. Whenever developers write code,we integrate all the code of developers at any point of time and we build, test,and deliver/deploy to client.
+This is called as CI/CD.
+6. Jenkins always run on 8080 port.(Default port )
+
+Important section of Jenkins?
+
+-Jenkins dashboard  ==> global configaratution ==> manage plugins ==> based on user specific needs install the plugins 
+- plugin management
+-global tool management.
+-job management. 
+-user management
+-security management 
+-slave connection.           3 to 5 interview qs 
+
+Role of Devops Engineer (or)  Build and Release Engineer
+
+-Installation and Configuration 
+-plugin management
+-creating jobs
+-integrating different tools
+-job pipelines 
+-taking jenkins backup.  2 interview qs  
+
+
+
+WORKFLOW:
+ 1. We can integrate/install Git,Maven,and Artifactory (JFROG/NEXUS) to the Jenkins.
+
+Jenkins need to practice 
+1. using wehooks 1 interview q
+2.build periodically and e-mail notification  1 interview q 
+3.build docker image and push ecr.
+
+In jenkins ==> two types of pipelines
+
+1. Declarative pipeline 2. Scriptive pipeline.
+In this pipelines we will write groovy script.
+Pipeline : pipeline is a code and it has set of stages and stages contains steps, steps will execute entire pipeline
+
+stages example:
+
+git clone url (git checkout)
+
+build
+
+deploy
+
+===============================================================================================
+steps step (gitcheckout)
+
+git clone url
+
+step (build)
+
+mvn clean package
+
+deploy
+
+war file copy (by using scp)
+
+Pipeline ===> Declarative   (file in github)
+pipeline ===> node ===> scriptive pipeline   (write in jenkins dashboard)
+agent:any, none, lable, docker
+1. Declarative pipeline.
+
+we will create Jenkinsfile in github.
+
+pipeline {
+agent any
+stages{
+stage (gitcheckout)
+{
+step (git clone url)
+}
+stage (build)
+{
+step (build)
+mvn clean pakage
+}
+stage (deploy)
+{
+step ()
+}
+}
+
+2.Scriptive pipeline ===> 
+node {
+agent any
+stages{
+stage (git checkout)
+step ()
+git clone url
+}
+stage (build)
+{
+step ()
+mvn clean package
+}
+stage (deploy)
+step ()
+{
+source destination
+}
+}
+
+
+
+
+sudo wget -O /etc/yum.repos.d/jenkins.repo \
+    https://pkg.jenkins.io/redhat-stable/jenkins.repo
+sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
+sudo yum upgrade
+# Add required dependencies for the jenkins package
+sudo yum install java-11-openjdk
+sudo yum install jenkins
+sudo systemctl daemon-reload
+
+
+You can enable the Jenkins service to start at boot with the command:
+
+sudo systemctl enable jenkins
+You can start the Jenkins service with the command:
+
+sudo systemctl start jenkins
+You can check the status of the Jenkins service using the command:
+
+sudo systemctl status jenkins
+
